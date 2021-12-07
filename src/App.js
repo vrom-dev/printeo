@@ -1,3 +1,14 @@
+import { Routes, Route, Link } from 'react-router-dom'
+import { Home } from './pages/Home'
+import { Print } from './pages/Print'
+import { Offers } from './pages/Offers'
+
 export function App () {
-  return <h1 className="hello">Hello World from Webpack</h1>
+  return (
+    <Routes>
+      <Route exact path="/print" element={<Print />} />
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/offers" element={<Offers />} />
+    </Routes>
+  )
 }

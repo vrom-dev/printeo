@@ -1,0 +1,30 @@
+.upload-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.upload-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-form__item {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media(max-width: 600px) {
+  .upload-form__item {
+    width: 100%;
+  }
+}
+.upload-form__item-title {
+  font-weight: 600;
+  margin-bottom: .5rem;
+}

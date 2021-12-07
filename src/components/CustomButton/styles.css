@@ -1,0 +1,40 @@
+.button {
+  height: 36px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-radius: var(--border-radius-default);
+  border-color: transparent;
+  border-width: .5px;
+  border-style: solid;
+  font-weight: 500;
+  font-family: inherit;
+  font-size: .9rem;
+  cursor: pointer;
+  transition: var(--transition-default);
+  margin: .5em;
+  padding: .5rem;
+}
+
+.button:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  transition: var(--transition-default);
+  border-color: var(--color-black);  
+}
+
+.button-secondary {
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border-color: var(--color-grey);
+}
+
+.button-secondary:hover {
+  border-color: var(--color-black);
+}
+
+@media(max-width: 600px) {
+  .button-filled {
+    width: 100%;
+  }
+}
+

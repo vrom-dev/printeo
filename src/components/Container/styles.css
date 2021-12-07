@@ -1,0 +1,10 @@
+.app-container {
+  margin-top: 4rem;
+  padding: 2rem;
+}
+
+@media (max-width: 1000px) {
+  .app-container {
+    padding: 1rem;
+  }
+}

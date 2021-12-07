@@ -9,7 +9,8 @@ module.exports = {
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'public'),
-    clean: true
+    clean: true,
+    publicPath: '/'
   },
   optimization: {
     splitChunks: {
@@ -18,13 +19,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/index.html',
+      favicon: './src/assets/favicon.png'
     })
   ],
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   stats: 'minimal',
   module: {
