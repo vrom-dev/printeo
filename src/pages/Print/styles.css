@@ -28,3 +28,20 @@
   font-weight: 600;
   margin-bottom: .5rem;
 }
+
+.measures {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem
+}
+
+.measures-coord {
+  padding: .5rem;
+  margin: .2rem;
+  font-size: .8rem;
+  line-height: .8rem;
+  color: var(--text-color-secondary);
+  border: 1px solid var(--color-grey);
+  border-radius: var(--border-radius-default);
+}

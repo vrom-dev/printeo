@@ -32,9 +32,21 @@
   border-color: var(--color-black);
 }
 
+.button:disabled {
+  opacity: 0.5;
+}
+.button:disabled.button:hover {
+  cursor: auto;
+  background-color: var(--color-black);
+  color: var(--color-white); 
+}
+.button:disabled.button-secondary:hover {
+  cursor: auto;
+  border-color: var(--color-grey);
+}
+
 @media(max-width: 600px) {
   .button-filled {
     width: 100%;
   }
 }
-

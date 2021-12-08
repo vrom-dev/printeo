@@ -31,10 +31,7 @@ export const Offer = () => {
           <span className='offer-text-description'>Imprimakers3D</span>
         </div>
         <div className='offer-item'>
-          <CustomButton
-            label='Añadir al carrito'
-            addToCart
-          />
+          <CustomButton addToCart >Añadir al carrito</CustomButton>
         </div>
       </div>
     </>

@@ -24,8 +24,8 @@ export const Home = () => {
                 <span className='text-strong'>Disfruta.</span>
               </h1>
               <div className='home-button-container'>
-                <CustomButton label='Empezar a imprimir' filled/>
-                <CustomButton label='Quiero ser impresor' secondary filled/>
+                <CustomButton filled>Empezar a imprimir</CustomButton>
+                <CustomButton secondary filled>Quiero ser impresor</CustomButton>
               </div>
             </div>
             <div className='home-cta__logo'>

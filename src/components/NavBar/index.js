@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { CustomButton } from '../CustomButton'
 import { BurgerIcon } from './BurgerIcon'
@@ -19,16 +20,26 @@ export const NavBar = () => {
 
   return (
     <nav className='navbar'>
-      <img src={PrinteoLogo} className='navbar-logo'/>
+      <Link to="/">
+        <img src={PrinteoLogo} className='navbar-logo'/>
+      </Link>
       <BurgerIcon toggle={handleOpenMenu}/>
       <ul className={showMenu}>
-          <li className='navbar-list__item'>
-            <CustomButton label='Registrarse'/>
+          <li>
+            <Link to="/user/signup">
+              <CustomButton>Registrarse</CustomButton>
+            </Link>
           </li>
-          <li className='navbar-list__item'>Carrito</li>
-          <li className='navbar-list__item'>Carrito</li>
-          <li className='navbar-list__item'>Carrito</li>
-          <li className='navbar-list__item'>Carrito</li>
+          <li>
+            <Link to="/login">
+              <CustomButton secondary>Iniciar sesión</CustomButton>
+            </Link>
+          </li>
+          <li className='navbar-list__item'>
+            <Link to="/print">
+              Imprimir
+            </Link>
+          </li>
           <li className='navbar-list__item'>Carrito</li>
       </ul>
     </nav>

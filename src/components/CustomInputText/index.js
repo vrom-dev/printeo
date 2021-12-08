@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
+import { useInputValue } from '../../hooks'
 
 import './styles.css'
 
-export const CustomInputRange = ({ setScale }) => {
+export const CustomInputText = ({ setScale }) => {
   const [value, setValue] = useState(100)
   const handleChange = (e) => {
     setValue(e.target.value)

@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import './styles.css'
 
 import { Container } from '../../components/Container'
@@ -5,18 +7,20 @@ import { Layout } from '../../components/Layout'
 import { NavBar } from '../../components/NavBar'
 import { Footer } from '../../components/Footer'
 
+import { STLViewer } from '../../components/STLViewer'
 import { CustomInputFile } from '../../components/CustomInputFile'
 import { CustomInputRadio } from '../../components/CustomInputRadio'
 import { CustomInputRange } from '../../components/CustomInputRange'
 import { CustomSelect } from '../../components/CustomSelect'
 import { CustomButton } from '../../components/CustomButton'
 
-export const Print = () => {
-  // TODO set all values for every input
+const getMeasure = (size, scale) => Math.round(size * scale * 100) / 100 + 'mm'
 
+export const Print = () => {
+  const [scale, setScale] = useState(1)
+  const [loadedFile, setLoadedFile] = useState(null)
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e)
   }
 
   return (
@@ -28,11 +32,24 @@ export const Print = () => {
             Sube tu modelo <br/>
             y empieza a <span className='text-strong'>imprimir</span>
           </h2>
+          {
+            loadedFile
+              ? <STLViewer stlFile={'http://localhost:3003' + loadedFile.url}/>
+              : <CustomInputFile setLoadedFile={setLoadedFile} />
+          }
+          {
+            loadedFile && scale &&
+            <div className='measures'>
+              <div className='measures-coord'>X: {getMeasure(loadedFile.boundingBox[0], scale)}</div>
+              <div className='measures-coord'>Y: {getMeasure(loadedFile.boundingBox[1], scale)}</div>
+              <div className='measures-coord'>Z: {getMeasure(loadedFile.boundingBox[2], scale)}</div>
+            </div>
+          }
+
           <form
             className='upload-form-container'
             onSubmit={handleSubmit}
             >
-            <CustomInputFile />
             <div className='upload-form'>
               <div className='upload-form__item'>
                 <p className='upload-form__item-title'>2. Selecciona material</p>
@@ -58,12 +75,12 @@ export const Print = () => {
               </div>
               <div className='upload-form__item'>
                 <p className='upload-form__item-title'>5. Escala</p>
-                <CustomInputRange />
+                <CustomInputRange
+                  setScale={setScale}
+                />
               </div>
             </div>
-            <CustomButton
-              label='Ver ofertas'
-            />
+            <CustomButton disabled={!loadedFile}>Ver ofertas</CustomButton>
           </form>
         </Container>
       </Layout>
