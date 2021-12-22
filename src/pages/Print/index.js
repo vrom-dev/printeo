@@ -40,9 +40,9 @@ export const Print = () => {
           {
             loadedFile && scale &&
             <div className='measures'>
-              <div className='measures-coord'>X: {getMeasure(loadedFile.boundingBox[0], scale)}</div>
-              <div className='measures-coord'>Y: {getMeasure(loadedFile.boundingBox[1], scale)}</div>
-              <div className='measures-coord'>Z: {getMeasure(loadedFile.boundingBox[2], scale)}</div>
+              <div className='measures-coord'>X: {getMeasure(loadedFile.dimensions.x, scale)}</div>
+              <div className='measures-coord'>Y: {getMeasure(loadedFile.dimensions.y, scale)}</div>
+              <div className='measures-coord'>Z: {getMeasure(loadedFile.dimensions.z, scale)}</div>
             </div>
           }
 
