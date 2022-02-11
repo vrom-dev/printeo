@@ -26,7 +26,6 @@ export const CustomInputFile = ({ setLoadedFile }) => {
       setLoadedFile(jsonResponse)
     } catch (e) {
       setIsLoading(false)
-      console.log(e)
     }
   }
   return (
@@ -39,15 +38,15 @@ export const CustomInputFile = ({ setLoadedFile }) => {
       />
       {
         isLoading
-          ? <Spinner/>
+          ? <Spinner />
           : <>
-              <img src={uploadIcon} alt='upload-icon' />
-              <p className="custom-file-label-text text-center">
-                <span className='text-strong'><strong>Selecciona el archivo</strong></span><br/>
-                Soporte para archivos <strong>STL</strong><br/>
-                Tamaño máximo: 50MB
-              </p>
-            </>
+            <img src={uploadIcon} alt='upload-icon' />
+            <p className="custom-file-label-text text-center">
+              <span className='text-strong'><strong>Selecciona el archivo</strong></span><br />
+              Soporte para archivos <strong>STL</strong><br />
+              Tamaño máximo: 50MB
+            </p>
+          </>
       }
     </label>
   )

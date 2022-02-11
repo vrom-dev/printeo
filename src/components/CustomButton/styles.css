@@ -13,6 +13,7 @@
   transition: var(--transition-default);
   margin: .5em;
   padding: .5rem;
+  text-decoration: none;
 }
 
 .button:hover {
@@ -30,6 +31,16 @@
 
 .button-secondary:hover {
   border-color: var(--color-black);
+}
+
+.button-warning:hover {
+  border-color: var(--color-black);
+}
+
+.button-warning {
+  color: var(--color-white);
+  background-color: var(--color-red);
+  border-color: var(--color-grey);
 }
 
 .button:disabled {

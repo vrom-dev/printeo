@@ -1,0 +1,10 @@
+.notification-succeed {
+  background-color: #cceeff;
+  text-align: center;
+  padding: .5rem;
+}
+.notification-error {
+  background-color: #ffcccc;
+  text-align: center;
+  padding: .5rem;
+}

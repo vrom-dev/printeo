@@ -8,6 +8,15 @@
   align-items: center;
   justify-content: center;
   padding: .5rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 540px) {
+  .offer-item {
+    width: 33%;
+  }
+  .offer-item-hidden {
+    display: none
+  }
 }
 
 .offer-container {
@@ -17,6 +26,7 @@
   max-height: 7rem;
   display: flex;
   align-items: center;
+  overflow-x: auto;
 }
 
 .offer-text-price, .offer-text-others, .offer-text-category {

@@ -2,20 +2,28 @@ import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../../context/AuthContext'
+import { PrinterAuthContext } from '../../context/PrinterAuthContext'
+import { CartContext } from '../../context/CartContext'
 
-import { CustomButton } from '../CustomButton'
 import { BurgerIcon } from './BurgerIcon'
+import { BsCart } from 'react-icons/bs'
 
 import './styles.css'
 import PrinteoLogo from '../../assets/printeo-logo-32h.png'
+import PrinteoLogoForPrinters from '../../assets/printeo-logo-32h-printers.png'
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { user, setUser } = useContext(AuthContext)
+  const { authToken, setAuthToken } = useContext(AuthContext)
+  const { printerAuthToken, setPrinterAuthToken } = useContext(PrinterAuthContext)
+  const { totalProducts, clearCart } = useContext(CartContext)
 
-  const onLogout = () => {
+  const handleLogout = () => {
     window.localStorage.removeItem('printeo-session')
-    setUser(null)
+    window.localStorage.removeItem('printeo-printer-session')
+    clearCart()
+    setAuthToken(null)
+    setPrinterAuthToken(null)
   }
 
   const handleOpenMenu = () => {
@@ -29,44 +37,71 @@ export const NavBar = () => {
   return (
     <nav className='navbar'>
       <Link to="/">
-        <img src={PrinteoLogo} className='navbar-logo'/>
+        <img src={printerAuthToken ? PrinteoLogoForPrinters : PrinteoLogo} className='navbar-logo' />
       </Link>
-      <BurgerIcon toggle={handleOpenMenu}/>
+      <BurgerIcon toggle={handleOpenMenu} />
       <ul className={showMenu}>
         {
-          !user
+          !authToken && !printerAuthToken
             ? (
+              <>
+                <li className='navbar-list__item'>
+                  <Link to="/signup" className='button'>
+                    Registrarse
+                  </Link>
+                </li>
+                <li className='navbar-list__item'>
+                  <Link
+                    to="/login"
+                    className='button button-secondary'
+                  >
+                    Iniciar sesión
+                  </Link>
+                </li>
+              </>
+            )
+            :
             <>
-              <li>
-                <Link to="/signup">
-                  <CustomButton>Registrarse</CustomButton>
+              <li className='navbar-list__item'>
+                <Link
+                  to="/"
+                  className='button button-secondary'
+                  onClick={handleLogout}
+                >
+                  Logout
                 </Link>
               </li>
-              <li>
-                <Link to="/login">
-                  <CustomButton secondary>Iniciar sesión</CustomButton>
-                </Link>
-              </li>
-            </>
-              )
-            : (
-            <li>
-              <Link to="/">
-                <CustomButton
-                  secondary
-                  onClick={onLogout}
-                >Logout</CustomButton>
-              </Link>
-            </li>
-              )
-        }
 
-          <li className='navbar-list__item'>
-            <Link to="/print">
-              Imprimir
-            </Link>
-          </li>
-          <li className='navbar-list__item'>Carrito</li>
+              {
+                authToken ?
+                  <>
+                    <li className='navbar-list__item'>
+                      <Link to="/user/admin" className='navbar-list__link'>
+                        Panel de control
+                      </Link>
+                    </li>
+                    <li className='navbar-list__item'>
+                      <Link to="/print" className='navbar-list__link'>
+                        Nueva impresión
+                      </Link>
+                    </li>
+                    <li className='navbar-list__item'>
+                      <Link to="/cart" className='navbar-list__link'>
+                        <BsCart
+                          className='cart-icon'
+                        />
+                        {totalProducts()}
+                      </Link>
+                    </li>
+                  </> :
+                  <li className='navbar-list__item'>
+                    <Link to="/printer/admin" className='navbar-list__link'>
+                      Panel de control
+                    </Link>
+                  </li>
+              }
+            </>
+        }
       </ul>
     </nav>
   )

@@ -1,0 +1,14 @@
+.payment-message-wrapper {
+  margin-bottom: 2rem;
+}
+
+.payment-message {
+  color: var(--text-color-secondary);
+  text-align: center;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.payment-price {
+  color: var(--color-blue);
+}

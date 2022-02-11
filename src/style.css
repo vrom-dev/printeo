@@ -3,11 +3,11 @@
 
 :root {
   --font-size-base: 16px;
-  --transition-default: all .3s ease-in;
+  --transition-default: all .1s ease-in;
   --border-radius-default: 5px;
   --color-black: #000;
   --color-white: #fff;
-  --color-red: #ff2200;
+  --color-red: #ff553e;
   --color-blue: #007fff;
   --color-offwhite: #fafafa;
   --color-grey: #e5e5e5;

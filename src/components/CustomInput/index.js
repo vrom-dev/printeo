@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './styles.css'
 
 import { validateForm } from '../../utils/validateForm'
@@ -9,11 +9,16 @@ export const CustomInput = ({
   fieldName = '',
   required = false,
   errorMessage = 'Este campo es obligatorio',
+  initialValue = '',
   validateStatus,
   setValidateStatus
 }) => {
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
+
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
 
   const handleChange = (e) => {
     setValue(e.target.value)
@@ -50,7 +55,7 @@ export const CustomInput = ({
               : value
                 ? 'custom-input custom-input-success'
                 : 'custom-input'
-            }
+          }
         />
         <div className='custom-input-error-message text-center'>
           {error && errorMessage}

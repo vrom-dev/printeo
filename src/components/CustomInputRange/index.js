@@ -1,17 +1,30 @@
 import { useEffect, useState } from 'react'
-
 import './styles.css'
 
-export const CustomInputRange = ({ setScale }) => {
-  const [value, setValue] = useState(100)
+import { validateForm } from '../../utils/validateForm'
+
+
+export const CustomInputRange = ({
+  setScale,
+  name,
+  setValidateStatus,
+  validateStatus,
+  initialValue = 125
+}) => {
+  const [value, setValue] = useState(initialValue)
   const handleChange = (e) => {
     setValue(e.target.value)
     setScale(e.target.value / 100)
+    const isValid = validateForm[name](Number(e.target.value.trim() / 100))
+    const newStatus = { ...validateStatus }
+    if (isValid) {
+      newStatus[name] = true
+      setValidateStatus(newStatus)
+    } else {
+      newStatus[name] = false
+      setValidateStatus(newStatus)
+    }
   }
-
-  useEffect(() => {
-
-  })
 
   return (
     <div className='custom-input-range-container'>

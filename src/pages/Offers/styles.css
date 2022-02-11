@@ -1,0 +1,16 @@
+.checkout-success-container {
+  text-align: center;
+}
+
+.checkout-success-message {
+  color: var(--text-color-secondary);
+}
+
+.checkout-success-link {
+  text-decoration: none;
+  color: var(--color-blue);
+  font-weight: 600;
+}
+.checkout-success-link:hover {
+  color: var(--color-black);
+}

@@ -1,26 +1,50 @@
-import { Routes, Route } from 'react-router-dom'
+import { useContext } from 'react'
+import { Navigate, Routes, Route } from 'react-router-dom'
 
-import { CartContextProvider } from './context/CartContext'
-import { AuthContextProvider } from './context/AuthContext'
+import { AuthContext } from './context/AuthContext'
+import { PrinterAuthContext } from './context/PrinterAuthContext'
+import { OrderContext } from './context/OrderContext'
 
 import { Home } from './pages/Home'
+import { UserAdmin } from './pages/UserAdmin'
+import { STLAdmin } from './pages/STLAdmin'
+import { STLEdit } from './pages/STLEdit'
 import { Print } from './pages/Print'
 import { Signup } from './pages/Signup'
+import { PrinterSignup } from './pages/PrinterSignup'
+import { PrinterLogin } from './pages/PrinterLogin'
+import { PrinterAdmin } from './pages/PrinterAdmin'
+import { Login } from './pages/Login'
 import { Offers } from './pages/Offers'
 import { Checkout } from './pages/Checkout'
+import { CheckoutSuccess } from './pages/CheckoutSuccess'
+import { ShoppingCart } from './pages/ShoppingCart'
 
-export function App () {
+export function App() {
+  const { authToken } = useContext(AuthContext)
+  const { printerAuthToken } = useContext(PrinterAuthContext)
+  const { order } = useContext(OrderContext)
+
   return (
-    <AuthContextProvider>
-      <CartContextProvider>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/print" element={<Print />} />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/offers" element={<Offers />} />
-          <Route exact path="/checkout" element={<Checkout />} />
-        </Routes>
-      </CartContextProvider>
-    </AuthContextProvider>
+
+    <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/user/admin" element={authToken && !printerAuthToken ? <UserAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/user/prints" element={authToken && !printerAuthToken ? <STLAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/user/prints/:id" element={authToken && !printerAuthToken ? <STLEdit /> : <Navigate to='/' replace />} />
+      <Route exact path="/user/orders" element={authToken && !printerAuthToken ? <UserAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/print" element={!authToken || printerAuthToken ? <Navigate to='/login' replace /> : <Print />} />
+      <Route exact path="/signup" element={!authToken && !printerAuthToken ? <Signup /> : <Navigate to='/' replace />} />
+      <Route exact path="/login" element={!printerAuthToken && !authToken ? <Login /> : <Navigate to='/' replace />} />
+      <Route exact path="/offers" element={authToken && !printerAuthToken ? <Offers /> : <Navigate to='/' replace />} />
+      <Route exact path="/cart" element={!printerAuthToken ? <ShoppingCart /> : <Navigate to='/' replace />} />
+      <Route exact path="/printer/signup" element={!authToken && !printerAuthToken ? <PrinterSignup /> : <Navigate to='/' replace />} />
+      <Route exact path="/printer/login" element={!authToken && !printerAuthToken ? <PrinterLogin /> : <Navigate to='/' replace />} />
+      <Route exact path="/printer/admin" element={!authToken && printerAuthToken ? <PrinterAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/printer/orders" element={!authToken && printerAuthToken ? <PrinterAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/checkout" element={authToken && !printerAuthToken && order ? <Checkout /> : <Navigate to='/' replace />} />
+      <Route exact path="/checkout/completed" element={!authToken ? <Navigate to='/' /> : <CheckoutSuccess />} />
+    </Routes>
   )
 }
+

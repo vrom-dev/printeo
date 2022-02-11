@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Layout } from '../../components/Layout'
 import { Container } from '../../components/Container'
 import { NavBar } from '../../components/NavBar'
@@ -14,22 +16,26 @@ export const Home = () => {
   return (
     <>
       <Layout>
-        <NavBar/>
-         <Container>
+        <NavBar />
+        <Container>
           <div className='home-cta'>
             <div className='home-cta__text'>
               <h1 className='text-center'>
-                Diseña.<br/>
-                Imprime.<br/>
+                Diseña.<br />
+                Imprime.<br />
                 <span className='text-strong'>Disfruta.</span>
               </h1>
               <div className='home-button-container'>
-                <CustomButton filled>Empezar a imprimir</CustomButton>
-                <CustomButton secondary filled>Quiero ser impresor</CustomButton>
+                <Link to='/'>
+                  <CustomButton filled>Empezar a imprimir</CustomButton>
+                </Link>
+                <Link to='/printer/signup'>
+                  <CustomButton secondary filled>Quiero ser impresor</CustomButton>
+                </Link>
               </div>
             </div>
             <div className='home-cta__logo'>
-              <img src={homeSVG} className='home-logo'/>
+              <img src={homeSVG} className='home-logo' />
             </div>
           </div>
           <p className='home-subtitle'>
@@ -47,7 +53,7 @@ export const Home = () => {
           </div>
           <div className='home-subsection'>
             <div className='home-subsection__img-container'>
-              <img src={placeholderSVG} className='home-subsection-img'/>
+              <img src={placeholderSVG} className='home-subsection-img' />
             </div>
             <div className='home-subsection__items'>
               <h3 className='home-subsection-title'>Lorem ipsum dolor sit amet</h3>
@@ -67,7 +73,7 @@ export const Home = () => {
           </div>
           <div className='home-subsection'>
             <div className='home-subsection__img-container'>
-              <img src={placeholderSVG} className='home-subsection-img'/>
+              <img src={placeholderSVG} className='home-subsection-img' />
             </div>
             <div className='home-subsection__items'>
               <h3 className='home-subsection-title'>Lorem ipsum dolor sit amet</h3>
@@ -87,7 +93,7 @@ export const Home = () => {
           </div>
           <div className='home-subsection'>
             <div className='home-subsection__img-container'>
-              <img src={placeholderSVG} className='home-subsection-img'/>
+              <img src={placeholderSVG} className='home-subsection-img' />
             </div>
             <div className='home-subsection__items'>
               <h3 className='home-subsection-title'>Lorem ipsum dolor sit amet</h3>

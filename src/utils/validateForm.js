@@ -1,16 +1,33 @@
+const materials = [
+  'Gris',
+  'Marrón',
+  'Lila',
+  'Verde'
+]
+
 export const validateForm = {
   username: (username) => {
     const usernameRegex = /^[a-zA-Z0-9]{4,10}$/
     if (usernameRegex.test(username)) return true
     return false
   },
+  companyName: (companyName) => {
+    const nameRegex = /^[a-zA-Z\u00C0-\u017F\s0-9]{1,40}$/
+    if (nameRegex.test(companyName)) return true
+    return false
+  },
   name: (name) => {
-    const nameRegex = /^[a-zA-Z\u00C0-\u017F\s]{2,40}$/
+    const nameRegex = /^[a-zA-Z\u00C0-\u017F\s]{1,40}$/
     if (nameRegex.test(name)) return true
     return false
   },
-  surname: (surname) => {
-    const surnameRegex = /^[a-zA-Z\u00C0-\u017F\s]{2,40}$/
+  firstSurname: (surname) => {
+    const surnameRegex = /^[a-zA-Z\u00C0-\u017F\s]{1,40}$/
+    if (surnameRegex.test(surname)) return true
+    return false
+  },
+  secondSurname: (surname) => {
+    const surnameRegex = /^[a-zA-Z\u00C0-\u017F\s]{1,40}$/
     if (surnameRegex.test(surname)) return true
     return false
   },
@@ -58,5 +75,17 @@ export const validateForm = {
   street: (city) => {
     if (city !== '') return true
     return false
+  },
+  innerFill: (fill) => {
+    return fill === 50 || fill === 80 || fill === 100
+  },
+  accuracy: (accuracy) => {
+    return accuracy === 0.02 || accuracy === 0.04
+  },
+  scale: (scale) => {
+    return scale > 0 && scale < 1.5
+  },
+  material: (material) => {
+    return materials.find(m => m === material)
   }
 }

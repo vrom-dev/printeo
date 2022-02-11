@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react'
-
-import './styles.css'
-
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
-import { createUser } from '../../service/user'
+
+
+import { UserService } from '../../service/UserService'
 
 import { Container } from '../../components/Container'
 import { Layout } from '../../components/Layout'
@@ -12,12 +12,16 @@ import { Footer } from '../../components/Footer'
 import { CustomInput } from '../../components/CustomInput'
 import { CustomButton } from '../../components/CustomButton'
 
+import './styles.css'
+
 export const Signup = () => {
-  const { setUser } = useContext(AuthContext)
+  const { setAuthToken } = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const [validateStatus, setValidateStatus] = useState({
-    username: false,
     name: false,
-    surname: false,
+    firstSurname: false,
+    secondSurname: false,
     email: false,
     password: false,
     phone: true,
@@ -28,25 +32,25 @@ export const Signup = () => {
   })
 
   const formIsValid = () => {
-    return validateStatus.username &&
-    validateStatus.name &&
-    validateStatus.surname &&
-    validateStatus.email &&
-    validateStatus.password &&
-    validateStatus.phone &&
-    validateStatus.country &&
-    validateStatus.street &&
-    validateStatus.city &&
-    validateStatus.zipcode
+    return validateStatus.name &&
+      validateStatus.firstSurname &&
+      validateStatus.secondSurname &&
+      validateStatus.email &&
+      validateStatus.password &&
+      validateStatus.phone &&
+      validateStatus.country &&
+      validateStatus.street &&
+      validateStatus.city &&
+      validateStatus.zipcode
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    if (!formIsValid()) return
     const user = {
-      username: e.target.username.value,
       name: e.target.name.value,
-      surname: e.target.surname.value,
+      firstSurname: e.target.firstSurname.value,
+      secondSurname: e.target.secondSurname.value,
       email: e.target.email.value,
       password: e.target.password.value,
       phone: e.target.phone.value,
@@ -57,27 +61,43 @@ export const Signup = () => {
         zipcode: e.target.zipcode.value
       }
     }
-    const response = await createUser(user)
-    window.localStorage.setItem('printeo-session', JSON.stringify(response.data))
-    setUser(response)
+    const userService = new UserService()
+    const accessToken = await userService.createUser(user)
+    setAuthToken(accessToken)
+    navigate('../')
   }
   return (
     <>
       <Layout>
-        <NavBar/>
+        <NavBar />
         <Container>
           <h2 className='text-center'>
-              Únete a la familia <span className='text-strong'>Printeo</span>
+            Únete a la familia <span className='text-strong'>Printeo</span>
           </h2>
           <form className='signup-form' onSubmit={handleSubmit}>
             <div className='signup-form__container'>
               <div className='signup-form__column'>
                 <h3 className='text-center'>Tus datos</h3>
                 <CustomInput
-                  fieldName='Nombre de usuario'
-                  name='username'
+                  fieldName='Nombre'
+                  name='name'
                   type='text'
-                  errorMessage='Sólo se permiten números, letras y entre 4 y 10 carácteres'
+                  required
+                  setValidateStatus={setValidateStatus}
+                  validateStatus={validateStatus}
+                />
+                <CustomInput
+                  fieldName='Primer apellido'
+                  name='firstSurname'
+                  type='text'
+                  required
+                  setValidateStatus={setValidateStatus}
+                  validateStatus={validateStatus}
+                />
+                <CustomInput
+                  fieldName='Segundo apellido'
+                  name='secondSurname'
+                  type='text'
                   required
                   setValidateStatus={setValidateStatus}
                   validateStatus={validateStatus}
@@ -96,22 +116,6 @@ export const Signup = () => {
                   name='password'
                   type='password'
                   errorMessage='Req. Una mayúscula, una minúscula, un número, un carácter especial y mínimo 8 carácteres'
-                  required
-                  setValidateStatus={setValidateStatus}
-                  validateStatus={validateStatus}
-                />
-                <CustomInput
-                  fieldName='Nombre'
-                  name='name'
-                  type='text'
-                  required
-                  setValidateStatus={setValidateStatus}
-                  validateStatus={validateStatus}
-                />
-                <CustomInput
-                  fieldName='Apellidos'
-                  name='surname'
-                  type='text'
                   required
                   setValidateStatus={setValidateStatus}
                   validateStatus={validateStatus}
