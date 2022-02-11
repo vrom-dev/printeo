@@ -9,7 +9,7 @@ export const CustomInputRange = ({
   name,
   setValidateStatus,
   validateStatus,
-  initialValue = 125
+  initialValue = 100
 }) => {
   const [value, setValue] = useState(initialValue)
   const handleChange = (e) => {

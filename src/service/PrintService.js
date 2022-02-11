@@ -56,4 +56,17 @@ export class PrintService extends HttpService {
     const { data } = await response.json()
     return data
   }
+  async deletePrint(printId, token) {
+    this.setToken(token)
+    const response = await window.fetch(`${this.baseUrl}/print/${printId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.token
+      }
+    })
+    const { data } = await response.json()
+    return data
+  }
 }

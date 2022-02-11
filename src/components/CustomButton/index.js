@@ -11,7 +11,6 @@ export const CustomButton = ({
   warning = false,
   onClick
 }) => {
-  const checkAddToCartIcon = window.innerWidth < 600 && addToCart
 
   const checkIfFilled = filled ? 'button button-filled' : 'button'
   let styles = checkIfFilled
@@ -27,7 +26,7 @@ export const CustomButton = ({
       disabled={disabled}
       onClick={onClick}
     >{
-        checkAddToCartIcon
+        addToCart
           ? <BsFillCartCheckFill />
           : children
       }</button>

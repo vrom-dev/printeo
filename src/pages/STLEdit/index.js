@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import './styles.css'
 
 import { AuthContext } from '../../context/AuthContext'
+import { CartContext } from '../../context/CartContext'
 
 import { Container } from '../../components/Container'
 import { Layout } from '../../components/Layout'
@@ -10,7 +11,6 @@ import { NavBar } from '../../components/NavBar'
 import { Footer } from '../../components/Footer'
 
 import { STLViewer } from '../../components/STLViewer'
-import { Spinner } from '../../components/Spinner'
 import { CustomInputRadio } from '../../components/CustomInputRadio'
 import { CustomInputRange } from '../../components/CustomInputRange'
 import { CustomSelect } from '../../components/CustomSelect'
@@ -23,6 +23,7 @@ const getMeasure = (size, scale) => Math.round(size * scale * 100) / 100 + 'mm'
 export const STLEdit = () => {
   const { id } = useParams()
   const { authToken } = useContext(AuthContext)
+  const { deletePrint } = useContext(CartContext)
   const [print, setPrint] = useState(null)
   const navigate = useNavigate()
   const [scale, setScale] = useState(null)
@@ -58,7 +59,7 @@ export const STLEdit = () => {
 
   console.log(material, innerFill, accuracy, scale)
 
-  const handleSubmit = async (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault()
     if (!formIsValid()) return
     const updatedPrintData = {
@@ -69,7 +70,15 @@ export const STLEdit = () => {
     }
     const printService = new PrintService()
     await printService.updatePrint(print.id, updatedPrintData, authToken)
-    navigate('../user/prints')
+    navigate('/user/prints', { replace: true })
+  }
+
+  const handleDelete = async (e) => {
+    e.preventDefault()
+    deletePrint(print.id)
+    const printService = new PrintService()
+    await printService.deletePrint(print.id, authToken)
+    navigate('/user/prints', { replace: true })
   }
 
   return (
@@ -85,7 +94,7 @@ export const STLEdit = () => {
             <>
               <form
                 className='upload-form-container'
-                onSubmit={handleSubmit}
+                onSubmit={handleEdit}
               >
                 <STLViewer stlFile={'http://localhost:3003' + print.file.url} />
                 <div className='measures'>
@@ -145,7 +154,7 @@ export const STLEdit = () => {
               </form>
               <form
                 className='upload-form-container'
-                onSubmit={handleSubmit}
+                onSubmit={handleDelete}
               >
                 <CustomButton disabled={!print} warning>Eliminar impresión</CustomButton>
               </form>
