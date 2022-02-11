@@ -3,14 +3,14 @@ import { HttpService } from './HttpService'
 export class OrderService extends HttpService {
   async createOrder(order, token) {
     this.setToken(token)
-    const response = await window.fetch(`${this.baseUrl}/payment`, {
+    const response = await window.fetch(`${this.baseUrl}/order`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Authorization': this.token
       },
-      body: JSON.stringify({ items: order })
+      body: JSON.stringify(order)
     })
     const data = await response.json()
     return data
@@ -26,6 +26,20 @@ export class OrderService extends HttpService {
         'Authorization': this.token
       },
       body: JSON.stringify({ items: order })
+    })
+    const data = await response.json()
+    return data
+  }
+
+  async getOrdersByUser(userId, token) {
+    this.setToken(token)
+    const response = await window.fetch(`${this.baseUrl}/order/user/${userId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.token
+      }
     })
     const data = await response.json()
     return data
