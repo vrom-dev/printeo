@@ -1,4 +1,4 @@
-.table-container {
+.prints-table-container {
   overflow-x: auto;
   table-layout: fixed;
   width: 100%;
@@ -11,23 +11,20 @@
   }
 }
 
-.table {
+.prints-table {
   border-collapse: collapse;
   border-spacing: 0;
   padding: 1rem;
 }
-th, td {
-  text-align: left;
-  padding: 8px;
-}
 
-.table tr {
+
+.prints-table tr {
   background: var(--color-offwhite);
   border-top: 1px solid var(--color-grey);
   border-bottom: 1px solid var(--color-grey);
 }
 
 
-.table tr:nth-child(even) {
+.prints-table tr:nth-child(even) {
   background: var(--color-white);
 }

@@ -11,7 +11,7 @@ import { PrintService } from '../../service/PrintService'
 import './styles.css'
 
 
-export const PrintsTable = () => {
+export const OrdersTable = () => {
   const { authToken } = useContext(AuthContext)
   const { addPrint } = useContext(CartContext)
   const [prints, setPrints] = useState([])

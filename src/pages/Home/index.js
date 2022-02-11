@@ -23,10 +23,10 @@ export const Home = () => {
               <h1 className='text-center'>
                 Diseña.<br />
                 Imprime.<br />
-                <span className='text-strong'>Disfruta.</span>
+                <span className='text-strong'>Recibe.</span>
               </h1>
               <div className='home-button-container'>
-                <Link to='/'>
+                <Link to='/signup'>
                   <CustomButton filled>Empezar a imprimir</CustomButton>
                 </Link>
                 <Link to='/printer/signup'>
@@ -84,9 +84,9 @@ export const Home = () => {
           </div>
           <Step
             stepNumber='3'
-            sectionTitle='Disfruta'
+            sectionTitle='Recibe'
           />
-          <h2 className='text-center home-section-title'>Recibe tu pedido en 24h</h2>
+          <h2 className='text-center home-section-title'>Recibe tu pedido en casa</h2>
           <div className='home-section-description'>
             <p className='text-secondary home-section-description__item'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum neque id tempor tincidunt. Morbi sed massa vulp ut at e lacus blandit bibendum. Vivamus viverra nec lorem vel convallis</p>
             <p className='text-secondary home-section-description__item'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum neque id tempor tincidunt. Morbi sed massa vulp ut at e lacus blandit bibendum. Vivamus viverra nec lorem vel convallis</p>

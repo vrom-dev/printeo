@@ -85,3 +85,12 @@
 .cart-item-message {
   text-align: center;
 }
+
+.cart-item-totalprice {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cart-item-detail {
+  color: var(--color-blue);
+}

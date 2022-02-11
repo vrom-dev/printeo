@@ -57,8 +57,6 @@ export const STLEdit = () => {
       validateStatus.material
   }
 
-  console.log(material, innerFill, accuracy, scale)
-
   const handleEdit = async (e) => {
     e.preventDefault()
     if (!formIsValid()) return
@@ -68,17 +66,17 @@ export const STLEdit = () => {
       accuracy,
       scale
     }
-    const printService = new PrintService()
-    await printService.updatePrint(print.id, updatedPrintData, authToken)
-    navigate('/user/prints', { replace: true })
+    const printService = new PrintService();
+    await printService.updatePrint(print.id, updatedPrintData, authToken);
+    navigate('/user/prints', { replace: true });
   }
 
   const handleDelete = async (e) => {
     e.preventDefault()
     deletePrint(print.id)
-    const printService = new PrintService()
-    await printService.deletePrint(print.id, authToken)
-    navigate('/user/prints', { replace: true })
+    const printService = new PrintService();
+    await printService.deletePrint(print.id, authToken);
+    navigate('/user/prints', { replace: true });
   }
 
   return (
@@ -87,8 +85,7 @@ export const STLEdit = () => {
         <NavBar />
         <Container>
           <h2 className='text-center'>
-            Sube tu modelo <br />
-            y empieza a <span className='text-strong'>imprimir</span>
+            Configura <span className='text-strong'>tu impresión</span>
           </h2>            {
             print && scale && innerFill && material && accuracy &&
             <>

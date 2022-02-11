@@ -8,7 +8,6 @@ import { Container } from '../../components/Container'
 import { Layout } from '../../components/Layout'
 import { NavBar } from '../../components/NavBar'
 import { Footer } from '../../components/Footer'
-import { CustomButton } from '../../components/CustomButton'
 
 import { OrderService } from '../../service/OrderService'
 
@@ -28,7 +27,7 @@ export const CheckoutSuccess = () => {
     const orderObj = { ...order, payment }
     async function saveOrderInDB(order) {
       const orderService = new OrderService()
-      const newOrder = await orderService.createOrder(order, authToken)
+      await orderService.createOrder(order, authToken)
     }
     saveOrderInDB(orderObj)
     removeOrder()

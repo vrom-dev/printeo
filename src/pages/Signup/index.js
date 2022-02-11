@@ -64,7 +64,7 @@ export const Signup = () => {
     const userService = new UserService()
     const accessToken = await userService.createUser(user)
     setAuthToken(accessToken)
-    navigate('../')
+    navigate('/user/prints')
   }
   return (
     <>

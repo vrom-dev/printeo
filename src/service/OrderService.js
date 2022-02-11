@@ -34,14 +34,28 @@ export class OrderService extends HttpService {
   async getOrdersByUser(userId, token) {
     this.setToken(token)
     const response = await window.fetch(`${this.baseUrl}/order/user/${userId}`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'Authorization': this.token
       }
     })
-    const data = await response.json()
+    const { data } = await response.json()
+    return data
+  }
+
+  async getOrder(orderId, token) {
+    this.setToken(token)
+    const response = await window.fetch(`${this.baseUrl}/order/${orderId}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.token
+      }
+    })
+    const { data } = await response.json()
     return data
   }
 }

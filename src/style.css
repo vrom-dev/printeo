@@ -57,3 +57,7 @@ h2 {
   }
 }
 
+th, td {
+  text-align: left;
+  padding: 8px;
+}

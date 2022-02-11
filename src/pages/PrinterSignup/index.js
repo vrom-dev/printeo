@@ -66,7 +66,7 @@ export const PrinterSignup = () => {
     const printerService = new PrinterService()
     const accessToken = await printerService.createPrinter(printer)
     setPrinterAuthToken(accessToken)
-    navigate('../')
+    navigate('/printer/orders')
   }
   return (
     <>

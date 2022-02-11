@@ -19,6 +19,8 @@ import { Offers } from './pages/Offers'
 import { Checkout } from './pages/Checkout'
 import { CheckoutSuccess } from './pages/CheckoutSuccess'
 import { ShoppingCart } from './pages/ShoppingCart'
+import { UserOrders } from './pages/UserOrders'
+import { OrderDetail } from './pages/OrderDetail'
 
 export function App() {
   const { authToken } = useContext(AuthContext)
@@ -26,13 +28,13 @@ export function App() {
   const { order } = useContext(OrderContext)
 
   return (
-
     <Routes>
-      <Route exact path="/" element={<Home />} />
+      <Route exact path="/" element={!authToken && !printerAuthToken ? <Home /> : authToken ? <Navigate to='/user/admin' replace /> : <Navigate to='/printer/admin' replace />} />
       <Route exact path="/user/admin" element={authToken && !printerAuthToken ? <UserAdmin /> : <Navigate to='/' replace />} />
-      <Route exact path="/user/prints" element={authToken && !printerAuthToken ? <STLAdmin /> : <Navigate to='/' replace />} />
       <Route exact path="/user/prints/:id" element={authToken && !printerAuthToken ? <STLEdit /> : <Navigate to='/' replace />} />
-      <Route exact path="/user/orders" element={authToken && !printerAuthToken ? <UserAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/user/prints" element={authToken && !printerAuthToken ? <STLAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/user/orders/:id" element={authToken && !printerAuthToken ? <OrderDetail /> : <Navigate to='/' replace />} />
+      <Route exact path="/user/orders" element={authToken && !printerAuthToken ? <UserOrders /> : <Navigate to='/' replace />} />
       <Route exact path="/print" element={!authToken || printerAuthToken ? <Navigate to='/login' replace /> : <Print />} />
       <Route exact path="/signup" element={!authToken && !printerAuthToken ? <Signup /> : <Navigate to='/' replace />} />
       <Route exact path="/login" element={!printerAuthToken && !authToken ? <Login /> : <Navigate to='/' replace />} />
@@ -41,6 +43,7 @@ export function App() {
       <Route exact path="/printer/signup" element={!authToken && !printerAuthToken ? <PrinterSignup /> : <Navigate to='/' replace />} />
       <Route exact path="/printer/login" element={!authToken && !printerAuthToken ? <PrinterLogin /> : <Navigate to='/' replace />} />
       <Route exact path="/printer/admin" element={!authToken && printerAuthToken ? <PrinterAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/printer/orders/:id" element={!authToken && printerAuthToken ? <OrderDetail /> : <Navigate to='/' replace />} />
       <Route exact path="/printer/orders" element={!authToken && printerAuthToken ? <PrinterAdmin /> : <Navigate to='/' replace />} />
       <Route exact path="/checkout" element={authToken && !printerAuthToken && order ? <Checkout /> : <Navigate to='/' replace />} />
       <Route exact path="/checkout/completed" element={!authToken ? <Navigate to='/' /> : <CheckoutSuccess />} />

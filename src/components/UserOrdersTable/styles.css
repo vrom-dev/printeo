@@ -1,0 +1,22 @@
+.label-status-paid, 
+.label-status-sent, 
+.label-status-received {
+  font-size: .8rem;
+  padding: .2rem .4rem;
+  border-radius: var(--border-radius-default);
+}
+
+.label-status-paid {
+  background-color: var(--color-grey);
+  color: var(--color-black);
+}
+
+.label-status-sent {
+  background-color: rgb(255, 155, 0);
+  color: var(--color-white);
+}
+
+.label-status-received {
+  background-color: rgb(0, 140, 0);
+  color: var(--color-white);
+}
