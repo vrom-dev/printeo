@@ -1,75 +1,101 @@
 import { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
-import { CartContext } from '../../context/CartContext'
+import { PrinterAuthContext } from '../../context/PrinterAuthContext'
 
-import { CustomButton } from '../CustomButton'
+import { LABEL_STYLE, ORDER_STATUS } from '../../utils/orderStatus'
 import { Spinner } from '../Spinner'
 
-import { PrintService } from '../../service/PrintService'
+import { OrderService } from '../../service/OrderService'
+import { PrinterService } from '../../service/PrinterService'
 
-import './styles.css'
+import { CustomButton } from '../../components/CustomButton'
 
+import { dateFormatter } from '../../utils/dateFormatter'
 
-export const OrdersTable = () => {
-  const { authToken } = useContext(AuthContext)
-  const { addPrint } = useContext(CartContext)
-  const [prints, setPrints] = useState([])
+export const PrinterOrdersTable = () => {
+  const { printerAuthToken } = useContext(PrinterAuthContext)
+  const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function getPrints() {
-      const printService = new PrintService()
-      const response = await printService.getPrintsFromUser(authToken)
-      setPrints(response)
+      const printerService = new PrinterService()
+      const { id } = await printerService.getPrinterId(printerAuthToken)
+      const orderService = new OrderService()
+      const response = await orderService.getOrdersByPrinter(id, printerAuthToken)
+      setOrders(response)
       setIsLoading(false)
     }
     getPrints()
   }, [])
 
+  const handleOrderState = async (orderId, status) => {
+    const orderService = new OrderService()
+    const response = await orderService.updateOrderStatus(orderId, { status: status }, printerAuthToken)
+    const newOrders = [...orders].map(order => {
+      return order.id === response.id ? response : order
+    })
+    setOrders(newOrders)
+  }
+
   return isLoading ?
     <Spinner /> :
-    prints.length === 0 ?
+    orders.length === 0 ?
       <div>
-        No hay impresiones guardadas.
+        No has realizado pedidos todavía.
       </div> :
       <div className='prints-table-container'>
         <table className='prints-table'>
           <thead>
             <tr>
-              <th>Archivo</th>
-              <th>Material</th>
-              <th>Escala</th>
-              <th>Precisión</th>
-              <th>Relleno</th>
+              <th>Nº de pedido</th>
+              <th>Fecha</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th></th>
+              <th></th>
               <th></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {prints.map(print => {
+            {orders.map(order => {
               return (
-                <tr key={print.id}>
-                  <td>{print.file.fileName}</td>
-                  <td>{print.material}</td>
-                  <td>{print.scale}</td>
-                  <td>{print.accuracy}</td>
-                  <td>{print.innerFill}</td>
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{dateFormatter(new Date(order.createdAt))}</td>
+                  <td>{order.totalPrice}€</td>
                   <td>
-                    <Link
-                      to={`/user/prints/${print.id}`}
-                    >
-                      <CustomButton secondary >
-                        Editar
-                      </CustomButton>
-                    </Link>
+                    <span className={LABEL_STYLE[order.status]}>
+                      {ORDER_STATUS[order.status]}
+                    </span>
                   </td>
                   <th>
-                    <CustomButton
-                      addToCart
-                      onClick={() => addPrint(print.id)}
+                    <Link
+                      to={`/printer/orders/${order.id}`}
+                      className='button button-secondary'
                     >
-                      Añadir al carrito
+                      Detalle</Link>
+                  </th>
+                  <th>
+                    <CustomButton
+                      onClick={() => handleOrderState(order.id, 'paid')}
+                    >
+                      Pagado
+                    </CustomButton>
+                  </th>
+                  <th>
+                    <CustomButton
+                      onClick={() => handleOrderState(order.id, 'sent')}
+                    >
+                      Enviado
+                    </CustomButton>
+                  </th>
+                  <th>
+                    <CustomButton
+                      onClick={() => handleOrderState(order.id, 'received')}
+                    >
+                      Recibido
                     </CustomButton>
                   </th>
                 </tr>

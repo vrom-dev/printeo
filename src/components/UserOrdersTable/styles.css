@@ -1,8 +1,12 @@
 .label-status-paid, 
 .label-status-sent, 
 .label-status-received {
+  min-width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: .8rem;
-  padding: .2rem .4rem;
+  padding: 0 .5rem;
   border-radius: var(--border-radius-default);
 }
 

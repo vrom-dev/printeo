@@ -84,18 +84,18 @@ export const ShoppingCart = () => {
                   Object.keys(cart).map(print => (
                     <div
                       key={cart[print].id}
-                      className='cart-item'
+                      className='order-item'
                     >
-                      <div className='cart-item-description'>
-                        <div className='cart-item-name'>{cart[print].file.fileName}</div>
-                        <ul className='cart-item-list'>
+                      <div className='order-item-description'>
+                        <div className='order-item-name'>{cart[print].file.fileName}</div>
+                        <ul className='order-item-list'>
                           <li>Relleno interior: {cart[print].innerFill * 100}%</li>
                           <li>Material: {cart[print].material}</li>
                           <li>Precisión: {cart[print].accuracy} mm</li>
                           <li>Escala: {cart[print].scale * 100} %</li>
                         </ul>
                       </div>
-                      <div className='cart-item-description'>
+                      <div className='order-item-description'>
                         <button
                           className='cart-button'
                           onClick={() => removeItem(cart[print].id)}
@@ -123,7 +123,7 @@ export const ShoppingCart = () => {
               </div>
             ) :
             !isLoading &&
-            <div className='cart-item-message'>
+            <div className='order-item-message'>
               No hay nada en tu cesta todavía.
             </div>
           }

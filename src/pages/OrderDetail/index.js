@@ -45,28 +45,28 @@ export const OrderDetail = () => {
                 order.prints.map(print => (
                   <div
                     key={print.id}
-                    className='cart-item'
+                    className='order-item'
                   >
-                    <div className='cart-item-description'>
-                      <div className='cart-item-name'>{print.name}</div>
-                      <ul className='cart-item-list'>
+                    <div className='order-item-description'>
+                      <div className='order-item-name'>{print.name}</div>
+                      <ul className='order-item-list'>
                         <li>Relleno interior: {print.innerFill * 100}%</li>
                         <li>Material: {print.material}</li>
                         <li>Precisión: {print.accuracy} mm</li>
                         <li>Escala: {print.scale * 100} %</li>
                       </ul>
                     </div>
-                    <div className='cart-item-description'>
+                    <div className='order-item-description'>
                       <span className='cart-quantity'>Cantidad: </span>
                       <span className='cart-quantity'>{order.quantityDetails[print.id]}</span>
                     </div>
                   </div>
                 ))
               }
-              <div className='cart-item'>
-                <div className='cart-item-description'>
-                  <div className='cart-item-name'>Dirección de envío:</div>
-                  <ul className='cart-item-list'>
+              <div className='order-item'>
+                <div className='order-item-description'>
+                  <div className='order-item-name'>Dirección de envío:</div>
+                  <ul className='order-item-list'>
                     <li>{order.user.name} {order.user.firstSurname} {order.user.secondSurname}</li>
                     <li>{order.user.address.street}</li>
                     <li>{order.user.address.city} {order.user.address.zipcode}</li>
@@ -74,9 +74,9 @@ export const OrderDetail = () => {
                     <li>Telf. {order.user.phone}</li>
                   </ul>
                 </div>
-                <div className='cart-item-description'>
-                  <div className='cart-item-name'>Imprimido por:</div>
-                  <ul className='cart-item-list'>
+                <div className='order-item-description'>
+                  <div className='order-item-name'>Imprimido por:</div>
+                  <ul className='order-item-list'>
                     <li>{order.printer.companyName}</li>
                     <li>{order.printer.address.street}</li>
                     <li>{order.printer.address.city} {order.printer.address.zipcode}</li>
@@ -85,8 +85,8 @@ export const OrderDetail = () => {
                   </ul>
                 </div>
               </div>
-              <div className='cart-item'>
-                <div className='cart-item-totalprice'>Precio total: <span className='cart-item-detail'>{order.totalPrice}€</span>
+              <div className='order-item'>
+                <div className='order-item-totalprice'>Precio total: <span className='order-item-detail'>{order.totalPrice}€</span>
                 </div>
                 <div>
                   <span className={LABEL_STYLE[order.status]}>

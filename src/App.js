@@ -21,6 +21,7 @@ import { CheckoutSuccess } from './pages/CheckoutSuccess'
 import { ShoppingCart } from './pages/ShoppingCart'
 import { UserOrders } from './pages/UserOrders'
 import { OrderDetail } from './pages/OrderDetail'
+import { PrinterOrders } from './pages/PrinterOrders'
 
 export function App() {
   const { authToken } = useContext(AuthContext)
@@ -44,7 +45,7 @@ export function App() {
       <Route exact path="/printer/login" element={!authToken && !printerAuthToken ? <PrinterLogin /> : <Navigate to='/' replace />} />
       <Route exact path="/printer/admin" element={!authToken && printerAuthToken ? <PrinterAdmin /> : <Navigate to='/' replace />} />
       <Route exact path="/printer/orders/:id" element={!authToken && printerAuthToken ? <OrderDetail /> : <Navigate to='/' replace />} />
-      <Route exact path="/printer/orders" element={!authToken && printerAuthToken ? <PrinterAdmin /> : <Navigate to='/' replace />} />
+      <Route exact path="/printer/orders" element={!authToken && printerAuthToken ? <PrinterOrders /> : <Navigate to='/' replace />} />
       <Route exact path="/checkout" element={authToken && !printerAuthToken && order ? <Checkout /> : <Navigate to='/' replace />} />
       <Route exact path="/checkout/completed" element={!authToken ? <Navigate to='/' /> : <CheckoutSuccess />} />
     </Routes>
