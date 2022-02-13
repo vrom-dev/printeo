@@ -104,7 +104,7 @@ export const STLEdit = () => {
                   <div className='upload-form__item'>
                     <p className='upload-form__item-title'>2. Selecciona material</p>
                     <CustomSelect
-                      options={['Resin ELEGOO LCD UV', 'ANYCUBIC Resin 3D Grey', 'Resin ELEGOO Washable', 'eSUN Plant-Based Pro 3D Resin']}
+                      options={['Resin ELEGOO UV', 'ANYCUBIC Resin Grey', 'Resin ELEGOO Washable', 'eSUN Plant-Based Resin']}
                       setInputValue={setMaterial}
                       name='material'
                       setValidateStatus={setValidateStatus}

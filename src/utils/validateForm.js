@@ -1,9 +1,4 @@
-const materials = [
-  'Gris',
-  'Marrón',
-  'Lila',
-  'Verde'
-]
+const materials = ['Resin ELEGOO UV', 'ANYCUBIC Resin Grey', 'Resin ELEGOO Washable', 'eSUN Plant-Based Resin']
 
 export const validateForm = {
   username: (username) => {

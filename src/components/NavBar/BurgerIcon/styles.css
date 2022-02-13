@@ -8,7 +8,7 @@
   border: none;
   cursor: pointer;  
   background-color: transparent;
-  z-index: 100;
+  z-index: 10000;
   display: none;
   padding: 0;
 }
