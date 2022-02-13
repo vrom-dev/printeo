@@ -93,7 +93,7 @@ export const STLEdit = () => {
                 className='upload-form-container'
                 onSubmit={handleEdit}
               >
-                <STLViewer stlFile={'http://localhost:3003' + print.file.url} />
+                <STLViewer stlFile={`${process.env.API_URL}${print.file.url}`} />
                 <div className='measures'>
                   <div className='measures-coord'>X: {getMeasure(print.file.dimensions.x, scale)}</div>
                   <div className='measures-coord'>Y: {getMeasure(print.file.dimensions.y, scale)}</div>
@@ -104,7 +104,7 @@ export const STLEdit = () => {
                   <div className='upload-form__item'>
                     <p className='upload-form__item-title'>2. Selecciona material</p>
                     <CustomSelect
-                      options={['Gris', 'Marrón', 'Lila', 'Verde']}
+                      options={['Resin ELEGOO LCD UV', 'ANYCUBIC Resin 3D Grey', 'Resin ELEGOO Washable', 'eSUN Plant-Based Pro 3D Resin']}
                       setInputValue={setMaterial}
                       name='material'
                       setValidateStatus={setValidateStatus}

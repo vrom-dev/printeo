@@ -72,7 +72,7 @@ export const Print = () => {
           >
             {
               loadedFile
-                ? <STLViewer stlFile={'http://localhost:3003' + loadedFile.url} />
+                ? <STLViewer stlFile={process.env.API_URL + loadedFile.url} />
                 : <CustomInputFile setLoadedFile={setLoadedFile} />
             }
             {
@@ -87,7 +87,7 @@ export const Print = () => {
               <div className='upload-form__item'>
                 <p className='upload-form__item-title'>2. Selecciona material</p>
                 <CustomSelect
-                  options={['Gris', 'Marrón', 'Lila', 'Verde']}
+                  options={['Resin ELEGOO UV', 'ANYCUBIC Resin Grey', 'Resin ELEGOO Washable', 'eSUN Plant-Based Resin']}
                   setInputValue={setMaterial}
                   name='material'
                   setValidateStatus={setValidateStatus}

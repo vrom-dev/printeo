@@ -14,7 +14,7 @@ export const CustomInputFile = ({ setLoadedFile }) => {
     const data = new window.FormData()
     data.append('stl', e.target.files[0])
     try {
-      const rawUploadResponse = await window.fetch('http://localhost:3003/files', {
+      const rawUploadResponse = await window.fetch(`${process.env.API_URL}/files`, {
         method: 'POST',
         body: data
       })

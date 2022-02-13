@@ -148,7 +148,7 @@ export const PrinterAdmin = () => {
                       validateStatus={validateStatus}
                     />
                     <CustomInput
-                      fieldName='Precio de impresión (€/mm3):'
+                      fieldName='Precio de impresión (€/cm3):'
                       name='printingPrice'
                       type='number'
                       errorMessage='Introduce una cantidad válida'
@@ -158,7 +158,7 @@ export const PrinterAdmin = () => {
                       validateStatus={validateStatus}
                     />
                     <CustomInput
-                      fieldName='Precio de envío (€/mm3):'
+                      fieldName='Precio de envío (€/cm3):'
                       name='shippingPrice'
                       type='number'
                       errorMessage='Introduce una cantidad válida'

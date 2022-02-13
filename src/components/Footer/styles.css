@@ -83,3 +83,11 @@
   text-transform: uppercase;
   margin-top: 0;
 }
+
+.footer-nav-link {
+  text-decoration: none;
+  color: var(--text-color-secondary);
+}
+.footer-nav-link:hover {
+  color: var(--color-black);
+}

@@ -16,7 +16,7 @@ import { OrderService } from '../../service/OrderService'
 
 import './styles.css'
 
-const STRIPE_KEY = 'pk_test_51KRfbxJzeLnk59jC27oRMTz9ZThl3GZGuNCp9h7gTXi2fcwEwRchfmUkWOoX5qhevpnzHqwnslxnMlNg55vpGfJq00y1Y0rFdh'
+const STRIPE_KEY = process.env.STRIPE_KEY
 
 const stripePromise = loadStripe(STRIPE_KEY)
 
