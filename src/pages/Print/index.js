@@ -50,7 +50,7 @@ export const Print = () => {
       innerFill,
       accuracy,
       scale,
-      file: loadedFile,
+      file: loadedFile
     }
     const printService = new PrintService()
     await printService.createPrint(newPrint, authToken)
@@ -72,7 +72,7 @@ export const Print = () => {
           >
             {
               loadedFile
-                ? <STLViewer stlFile={process.env.API_URL + loadedFile.url} />
+                ? <STLViewer stlFile={process.env.NEXT_PUBLIC_API_URL + loadedFile.url} />
                 : <CustomInputFile setLoadedFile={setLoadedFile} />
             }
             {

@@ -66,17 +66,17 @@ export const STLEdit = () => {
       accuracy,
       scale
     }
-    const printService = new PrintService();
-    await printService.updatePrint(print.id, updatedPrintData, authToken);
-    navigate('/user/prints', { replace: true });
+    const printService = new PrintService()
+    await printService.updatePrint(print.id, updatedPrintData, authToken)
+    navigate('/user/prints', { replace: true })
   }
 
   const handleDelete = async (e) => {
     e.preventDefault()
     deletePrint(print.id)
-    const printService = new PrintService();
-    await printService.deletePrint(print.id, authToken);
-    navigate('/user/prints', { replace: true });
+    const printService = new PrintService()
+    await printService.deletePrint(print.id, authToken)
+    navigate('/user/prints', { replace: true })
   }
 
   return (
@@ -93,7 +93,7 @@ export const STLEdit = () => {
                 className='upload-form-container'
                 onSubmit={handleEdit}
               >
-                <STLViewer stlFile={`${process.env.API_URL}${print.file.url}`} />
+                <STLViewer stlFile={`${process.env.NEXT_PUBLIC_API_URL}${print.file.url}`} />
                 <div className='measures'>
                   <div className='measures-coord'>X: {getMeasure(print.file.dimensions.x, scale)}</div>
                   <div className='measures-coord'>Y: {getMeasure(print.file.dimensions.y, scale)}</div>

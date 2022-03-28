@@ -1,10 +1,10 @@
 export class HttpService {
-  constructor() {
+  constructor () {
     this.token = null
-    this.baseUrl = process.env.API_URL
+    this.baseUrl = process.env.NEXT_PUBLIC_API_URL
   }
 
-  setToken(newToken) {
+  setToken (newToken) {
     this.token = `Bearer ${newToken}`
   }
 }

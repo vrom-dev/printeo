@@ -16,7 +16,7 @@ import { OrderService } from '../../service/OrderService'
 
 import './styles.css'
 
-const STRIPE_KEY = process.env.STRIPE_KEY
+const STRIPE_KEY = process.env.NEXT_PUBLIC_STRIPE_KEY
 
 const stripePromise = loadStripe(STRIPE_KEY)
 
@@ -26,7 +26,7 @@ export const Checkout = () => {
   const { authToken } = useContext(AuthContext)
 
   useEffect(() => {
-    async function createStripePayment(order) {
+    async function createStripePayment (order) {
       const orderService = new OrderService()
       const data = await orderService.createPaymentSession(order, authToken)
       setClientSecret(data.clientSecret)
